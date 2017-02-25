@@ -23,12 +23,14 @@ repositories {
 }
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-starter:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-parent:${springBootVersion}"
+    compile("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
+    compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
 
     testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
     testCompile "junit:junit:4.11"
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.11'
+    gradleVersion = '3.4'
 }

@@ -1,0 +1,7 @@
+spring:
+    application:
+        name: selforganizer
+project:
+    ui-origin: http://localhost:3000
+server:
+    port: 9000
