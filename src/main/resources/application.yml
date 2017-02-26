@@ -2,6 +2,9 @@ spring:
     application:
         name: selforganizer
 project:
-    ui-origin: http://localhost:3000
+    cors:
+        ui-origin: http://localhost:3000
+        allow-credentials: true
+        max-age: 3600
 server:
     port: 9000

@@ -1,18 +1,22 @@
 package com.sendev.selforganizer.properties;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
+@Getter
+@Setter
 @ConfigurationProperties(prefix = "project")
 public class ApplicationProperties {
-    private String uiOrigin;
+    private Cors cors;
 
-    public String getUiOrigin() {
-        return uiOrigin;
-    }
-
-    public void setUiOrigin(String uiOrigin) {
-        this.uiOrigin = uiOrigin;
+    @Getter
+    @Setter
+    public static class Cors {
+        private Boolean allowCredentials;
+        private String uiOrigin;
+        private Long maxAge;
     }
 }

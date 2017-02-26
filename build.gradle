@@ -24,8 +24,9 @@ repositories {
 
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-parent:${springBootVersion}"
-    compile("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
+    //compile("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
     compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    compile "org.projectlombok:lombok:1.16.14"
 
     testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
     testCompile "junit:junit:4.11"
