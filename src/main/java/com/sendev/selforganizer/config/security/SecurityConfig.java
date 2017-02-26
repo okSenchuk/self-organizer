@@ -17,8 +17,8 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private String[] adminUrls = {"/api/**"};
-    private String[] userUrls = {"/users/**"};
+    private String[] adminUrls = {"/api/admin/**"};
+    private String[] userUrls = {"/api/user/**"};
 
     @Autowired
     private UserDetailsService service;
@@ -49,11 +49,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login", "/user").permitAll()
+                .antMatchers("/login", "/user", "/register").permitAll()
                 .antMatchers(adminUrls).hasRole("ADMIN").antMatchers(userUrls)
                 .authenticated().and()
                 .addFilterAfter(csrfHeaderFilter, CsrfFilter.class).csrf()
-                .ignoringAntMatchers("/login", "/logout")
+                .ignoringAntMatchers("/login", "/logout", "/register")
                 .csrfTokenRepository(csrfTokenRepository()).and().logout()
                 .logoutUrl("/logout");
     }
