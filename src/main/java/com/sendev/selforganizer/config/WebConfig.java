@@ -1,6 +1,6 @@
 package com.sendev.selforganizer.config;
 
-import com.sendev.selforganizer.properties.ApplicationProperties;
+import com.sendev.selforganizer.property.ApplicationProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

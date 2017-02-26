@@ -35,13 +35,13 @@ dependencies {
     //flyway
     compile "org.flywaydb:flyway-core:4.1.1"
 
-
     // other
     compile "org.projectlombok:lombok:1.16.14"
 
     // test
     testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
-    testCompile "junit:junit:4.11"
+    testCompile "com.h2database:h2:1.4.182"
+
 }
 
 task wrapper(type: Wrapper) {

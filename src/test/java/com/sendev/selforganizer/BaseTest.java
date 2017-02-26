@@ -6,15 +6,15 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public abstract class BaseIntegrationTest {
+public abstract class BaseTest {
 
     @BeforeClass
-    public static void setUp() {
+    public static void setUpClass() {
 
     }
 
     @AfterClass
-    public static void tearDown() {
+    public static void tearDownClass() {
 
     }
 }

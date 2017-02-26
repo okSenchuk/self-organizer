@@ -1,4 +1,4 @@
-package com.sendev.selforganizer.service;
+package com.sendev.selforganizer.service.impl;
 
 import com.sendev.selforganizer.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

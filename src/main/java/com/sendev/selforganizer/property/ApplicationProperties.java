@@ -1,4 +1,4 @@
-package com.sendev.selforganizer.properties;
+package com.sendev.selforganizer.property;
 
 import lombok.Getter;
 import lombok.Setter;

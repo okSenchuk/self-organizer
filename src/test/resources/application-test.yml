@@ -1,0 +1,24 @@
+spring:
+    application:
+        name: selforganizer
+    datasource:
+        driverClassName: com.h2.jdbc.Driver
+        url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
+    data:
+        jpa:
+            repositories:
+                enabled: true
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate:
+            ddl-auto: update
+flyway:
+    locations: db/migration
+    baseline-on-migrate: true
+project:
+    cors:
+        ui-origin: http://localhost:3000
+        allow-credentials: true
+        max-age: 3600
+server:
+    port: 9000
