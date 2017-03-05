@@ -8,12 +8,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserBuilder {
+public class EntityBuilder {
 
     @Autowired
     private PasswordEncoder encoder;
 
-    public User build(Registration registration) {
+    public User buildUser(Registration registration) {
         return User.builder()
                 .email(registration.getEmail())
                 .firstName(registration.getFirstName())

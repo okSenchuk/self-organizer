@@ -1,6 +1,6 @@
 package com.sendev.selforganizer.service;
 
-import com.sendev.selforganizer.builder.UserBuilder;
+import com.sendev.selforganizer.builder.EntityBuilder;
 import com.sendev.selforganizer.service.impl.RegistrationServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,7 +21,7 @@ public class RegistrationServiceTestConfig {
     }
 
     @Bean
-    public UserBuilder userBuilder() {
-        return new UserBuilder();
+    public EntityBuilder userBuilder() {
+        return new EntityBuilder();
     }
 }

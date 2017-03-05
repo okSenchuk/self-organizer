@@ -3,8 +3,10 @@ package com.sendev.selforganizer.config.security;
 
 import com.sendev.selforganizer.filter.CsrfHeaderFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -17,9 +19,13 @@ import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private String[] adminUrls = {"/api/admin/**"};
     private String[] userUrls = {"/api/user/**"};
+
+    @Autowired
+    private CsrfTokenRepository csrfTokenRepository;
 
     @Autowired
     private UserDetailsService service;
@@ -39,27 +45,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.requiresChannel()
-                .antMatchers("/api/**")
+                .antMatchers("/isAuthenticated", "/user", "/login", "/logout")
+                .requiresInsecure()
+                .antMatchers("/**")
                 .requiresSecure()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login")
                 .and()
                 .httpBasic()
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login", "/user", "/register").permitAll()
+                .antMatchers("/index", "/login", "/home", "/", "/logout",
+                        "/isAuthenticated", "/user").permitAll()
                 .antMatchers(adminUrls).hasRole("ADMIN").antMatchers(userUrls)
                 .authenticated().and()
                 .addFilterAfter(csrfHeaderFilter, CsrfFilter.class).csrf()
-                .ignoringAntMatchers("/login", "/logout", "/register")
-                .csrfTokenRepository(csrfTokenRepository()).and().logout()
-                .logoutUrl("/logout");
+                .ignoringAntMatchers("/isAuthenticated", "/login", "/user", "/register", "/logout")
+                .csrfTokenRepository(csrfTokenRepository).and()
+                .logout().logoutUrl("/logout")
+                .permitAll();
     }
 
-    private CsrfTokenRepository csrfTokenRepository() {
+    @Bean
+    public CsrfTokenRepository csrfTokenRepository() {
         HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
         repository.setHeaderName("X-XSRF-TOKEN");
         return repository;

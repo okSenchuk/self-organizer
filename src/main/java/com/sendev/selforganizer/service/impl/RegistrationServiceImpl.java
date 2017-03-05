@@ -1,7 +1,7 @@
 package com.sendev.selforganizer.service.impl;
 
 
-import com.sendev.selforganizer.builder.UserBuilder;
+import com.sendev.selforganizer.builder.EntityBuilder;
 import com.sendev.selforganizer.dto.Registration;
 import com.sendev.selforganizer.exception.RegistrationException;
 import com.sendev.selforganizer.model.User;
@@ -22,7 +22,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private UserRepository repository;
 
     @Autowired
-    private UserBuilder builder;
+    private EntityBuilder builder;
 
     @Override
     public Registration register(Registration registration) {
@@ -31,7 +31,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             if (!Objects.equals(registration.getPassword(), registration.getRepeatPassword())) {
                 throw new RegistrationException(format("Password and repeat password mismatch for user %s.", registration.getEmail()));
             }
-            repository.save(builder.build(registration));
+            repository.save(builder.buildUser(registration));
             return registration;
         }
         throw new RegistrationException(format("User %s already exists.", registration.getEmail()));
